@@ -1,0 +1,3 @@
+# Maven Properties Swing plugin
+
+
