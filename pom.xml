@@ -10,8 +10,7 @@
 
     <name>properties-to-yaml-plugin Maven Plugin</name>
 
-    <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
+    <url>https://github.com/org-metalib/properties-swing-plugin</url>
 
     <prerequisites>
         <maven>${maven.version}</maven>
