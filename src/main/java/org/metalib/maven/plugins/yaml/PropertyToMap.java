@@ -76,7 +76,13 @@ public class PropertyToMap {
         if (0 == input.size()) {
             return null;
         } else if (map.size() == input.size()) {
-            return map.entrySet().stream().sorted(Map.Entry.comparingByKey()).map(Map.Entry::getValue).collect(Collectors.toList());
+            return map
+                    .entrySet()
+                    .stream()
+                    .sorted(Map.Entry.comparingByKey())
+                    .map(Map.Entry::getValue)
+                    .map(input::get)
+                    .collect(Collectors.toList());
         } else {
             return input;
         }

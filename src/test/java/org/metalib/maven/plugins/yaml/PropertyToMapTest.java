@@ -22,7 +22,7 @@ public class PropertyToMapTest {
     static final ObjectMapper jacksonYaml = new ObjectMapper(new YAMLFactory());
 
     @Test
-    public void toMap() throws JsonProcessingException {
+    public void toMap0() throws JsonProcessingException {
         final var prop = new Properties();
         prop.setProperty("root.p0.s0", "v0");
         prop.setProperty("root.p0.s0", "v1");
@@ -33,6 +33,16 @@ public class PropertyToMapTest {
         prop.setProperty("root.p2.2", "root-p2-2");
         prop.setProperty("root.p2.3", "root-p2-3");
         prop.setProperty("root.p2.4", "root-p2-4");
+        final var result = PropertyToMap.transform(prop);
+        final var yaml = jacksonYaml.writeValueAsString(result);
+        assertNotNull(yaml);
+    }
+
+    @Test
+    public void toMap1() throws JsonProcessingException {
+        final var prop = new Properties();
+        prop.setProperty("root.a.1.name", "a name that is first");
+        prop.setProperty("root.a.2.name", "a name that is second");
         final var result = PropertyToMap.transform(prop);
         final var yaml = jacksonYaml.writeValueAsString(result);
         assertNotNull(yaml);
