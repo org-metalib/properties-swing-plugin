@@ -20,7 +20,7 @@
         <jackson.version>2.14.2</jackson.version>
         <junit4.version>4.13.2</junit4.version>
 
-        <maven.version>3.9.0</maven.version>
+        <maven.version>3.8.7</maven.version>
         <plexus-component.version>2.1.1</plexus-component.version>
 
         <maven-plugin-annotations.version>3.7.1</maven-plugin-annotations.version>
