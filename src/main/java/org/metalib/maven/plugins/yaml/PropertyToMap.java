@@ -3,6 +3,8 @@ package org.metalib.maven.plugins.yaml;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -55,10 +57,40 @@ public class PropertyToMap {
                 }
             }
             if (null != subkey) {
-                current.put(subkey.replace(ESCAPE_DOT_CHAR, ".").replace(ESCAPE_BACKSLASH_CHAR, "\\"), v);
+                current.put(subkey
+                        .replace(ESCAPE_DOT_CHAR, ".")
+                        .replace(ESCAPE_BACKSLASH_CHAR, "\\"),
+                        cast(v));
             }
         });
         return transformIfList(result);
+    }
+
+    static Object cast(Object value) {
+        if (value instanceof String) {
+            final var str = value.toString();
+            try {
+                return Long.parseLong(str);
+            } catch (Exception e) {
+                try {
+                    return new BigInteger(str);
+                } catch (Exception ee) {
+                    try {
+                        return new BigDecimal(str);
+                    } catch (Exception eee) {
+                        if ("true".equalsIgnoreCase(str)) {
+                            return Boolean.TRUE;
+                        } else if ("false".equalsIgnoreCase(str)) {
+                            return Boolean.FALSE;
+                        } else {
+                            return str;
+                        }
+                    }
+                }
+            }
+        } else {
+            return value;
+        }
     }
 
     static Object transformIfList(LinkedHashMap<String, Object> input) {

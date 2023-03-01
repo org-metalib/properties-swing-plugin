@@ -24,6 +24,9 @@ public class PropertyToMapTest {
     @Test
     public void toMap0() throws JsonProcessingException {
         final var prop = new Properties();
+        prop.setProperty("root.aa.s0", "111.00");
+        prop.setProperty("root.aa.s2", "111");
+        prop.setProperty("root.aa.s3", "111e2");
         prop.setProperty("root.p0.s0", "v0");
         prop.setProperty("root.p0.s0", "v1");
         prop.setProperty("root0", "root0-v1");
