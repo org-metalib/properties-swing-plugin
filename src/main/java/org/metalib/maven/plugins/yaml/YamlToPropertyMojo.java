@@ -20,6 +20,9 @@ import static java.lang.String.format;
 import static org.metalib.maven.plugins.yaml.PropertyToMap.jacksonYaml;
 import static org.metalib.maven.plugins.yaml.PropertyToMap.traverse;
 
+/**
+ * goal reads properties from yaml file and puts them to maven properties.
+ */
 @Mojo(name = "2prop", defaultPhase = LifecyclePhase.PROCESS_SOURCES)
 public class YamlToPropertyMojo extends AbstractMojo {
 
@@ -29,13 +32,13 @@ public class YamlToPropertyMojo extends AbstractMojo {
     @Parameter(defaultValue = "${project}", readonly = true, required = true)
     MavenProject project;
 
-    @Parameter(property = "prefix", defaultValue = "")
+    @Parameter(property = "prop2swing.prefix", defaultValue = "")
     String prefix;
 
-    @Parameter(property = "inputFile", required = true)
+    @Parameter(property = "prop2swing.inputFile", required = true)
     File inputFile;
 
-    @Parameter(property = "noOverride")
+    @Parameter(property = "prop2swing.noOverride")
     Boolean noOverride;
 
     @Override

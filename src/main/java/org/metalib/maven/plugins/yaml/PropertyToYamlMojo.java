@@ -18,7 +18,7 @@ import java.util.function.BiConsumer;
 import static org.metalib.maven.plugins.yaml.PropertyToMap.jacksonYaml;
 
 /**
- * Goal which touches a timestamp file.
+ * goal produces an output of maven properties to the output yaml file.
  */
 @Mojo(name = "2yaml", defaultPhase = LifecyclePhase.PROCESS_SOURCES)
 public class PropertyToYamlMojo extends AbstractMojo {
@@ -29,16 +29,16 @@ public class PropertyToYamlMojo extends AbstractMojo {
     @Parameter(defaultValue = "${project}", readonly = true, required = true)
     MavenProject project;
 
-    @Parameter(property = "properties")
+    @Parameter(property = "prop2swing.properties")
     Properties properties;
 
-    @Parameter(property = "template")
+    @Parameter(property = "prop2swing.template")
     Properties template;
 
-    @Parameter(property = "prefix", defaultValue = "")
+    @Parameter(property = "prop2swing.prefix", defaultValue = "")
     String prefix;
 
-    @Parameter(property = "outputFile", defaultValue = "${project.build.directory}/output.yaml", required = true)
+    @Parameter(property = "prop2swing.outputFile", defaultValue = "${project.build.directory}/output.yaml", required = true)
     File outputFile;
 
     @Override
