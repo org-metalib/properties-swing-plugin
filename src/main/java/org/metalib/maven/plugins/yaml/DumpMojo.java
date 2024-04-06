@@ -55,8 +55,12 @@ public class DumpMojo extends AbstractMojo {
         if (null != properties) {
             properties.forEach(propertyCollector);
         }
-        try(final var outputStream = new FileOutputStream(outputFile)) {
+        try {
             Files.createDirectories(outputFile.getParentFile().toPath());
+        } catch (IOException e) {
+            throw new MojoExecutionException(e);
+        }
+        try(final var outputStream = new FileOutputStream(outputFile)) {
             projectProperties.store(outputStream, "POM " + Optional.ofNullable(prefix).orElse(""));
         } catch (IOException e) {
             throw new MojoExecutionException(e);

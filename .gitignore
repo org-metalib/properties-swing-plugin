@@ -1,6 +1,7 @@
 log/
 target/
 config/
+out/
 
 ### STS ###
 .apt_generated
