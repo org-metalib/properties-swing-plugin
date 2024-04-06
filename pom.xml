@@ -16,7 +16,7 @@
     </prerequisites>
 
     <properties>
-        <snakeyaml.version>1.33</snakeyaml.version>
+        <snakeyaml.version>2.2</snakeyaml.version>
         <jackson.version>2.14.2</jackson.version>
         <junit4.version>4.13.2</junit4.version>
 
