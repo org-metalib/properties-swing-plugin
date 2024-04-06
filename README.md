@@ -73,16 +73,10 @@ mvn prop2swing:2yaml@k8s-secret
 ```
 
 ## Goal `2yaml`
-
 This goal takes maven properties and flushes them to an output file in yaml format.
 
-
 ## Goal `2prop`
+This goal takes a file in yaml format transforms to property format and adds to maven property
 
-
-## CLI examples
-
-Create a yaml file 
-```shell
-mvn 
-```
+## Goal `dump`
+This goal dumps mavem pom properties to the output file

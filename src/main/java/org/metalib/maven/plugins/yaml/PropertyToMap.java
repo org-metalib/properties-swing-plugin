@@ -105,7 +105,7 @@ public class PropertyToMap {
                 input.put(k, transformIfList((LinkedHashMap<String, Object>) v));
             }
         });
-        if (0 == input.size()) {
+        if (input.isEmpty()) {
             return null;
         } else if (map.size() == input.size()) {
             return map

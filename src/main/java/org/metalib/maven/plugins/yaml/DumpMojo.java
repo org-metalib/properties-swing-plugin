@@ -10,8 +10,10 @@ import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.logging.Logger;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.function.BiConsumer;
 
@@ -20,8 +22,8 @@ import static org.metalib.maven.plugins.yaml.PropertyToMap.jacksonYaml;
 /**
  * goal produces an output of maven properties to the output yaml file.
  */
-@Mojo(name = "2yaml", defaultPhase = LifecyclePhase.PROCESS_SOURCES)
-public class PropertyToYamlMojo extends AbstractMojo {
+@Mojo(name = "dump", defaultPhase = LifecyclePhase.PROCESS_SOURCES)
+public class DumpMojo extends AbstractMojo {
 
     @Requirement
     Logger logger;
@@ -35,7 +37,7 @@ public class PropertyToYamlMojo extends AbstractMojo {
     @Parameter(property = "prop2swing.prefix", defaultValue = "")
     String prefix;
 
-    @Parameter(property = "prop2swing.outputFile", defaultValue = "${project.build.directory}/output.yaml", required = true)
+    @Parameter(property = "prop2swing.outputFile", defaultValue = "${project.build.directory}/output.properties", required = true)
     File outputFile;
 
     @Override
@@ -53,9 +55,9 @@ public class PropertyToYamlMojo extends AbstractMojo {
         if (null != properties) {
             properties.forEach(propertyCollector);
         }
-        try {
+        try(final var outputStream = new FileOutputStream(outputFile)) {
             Files.createDirectories(outputFile.getParentFile().toPath());
-            jacksonYaml.writeValue(outputFile, PropertyToMap.transform(projectProperties));
+            projectProperties.store(outputStream, "POM " + Optional.ofNullable(prefix).orElse(""));
         } catch (IOException e) {
             throw new MojoExecutionException(e);
         }
